@@ -22,7 +22,7 @@ developers:
       - java
   -
     name: joker
-    weight: 150kg
+    age: 150
     languages:
       - python
       - golang

@@ -6,7 +6,7 @@ import (
 )
 import viper "github.com/spf13/viper"
 
-var configPath = "./config/yamlconfig.yaml"
+var configPath = "./config/viper_1/yamlconfig.yaml"
 
 //最基本的使用viper读取配置文件的方法
 func main() {
