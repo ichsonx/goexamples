@@ -22,4 +22,5 @@
 ### goroutine
 [waitgroup：使用waitgroup关闭多线程的最佳实践](https://github.com/ichsonx/goexamples/blob/main/goroutine/waitgroup/waitgroupCloseMultipleGoroutine.go)
 ### config
-[viper：viper最基本的读取配置文件方法，及一些需要注意的概念](https://github.com/ichsonx/goexamples/blob/main/config/viper_1/main.go)
+[viper：viper最基本的读取配置文件方法，及一些需要注意的概念](https://github.com/ichsonx/goexamples/blob/main/config/viper_1/main.go)  
+[viper：一般反序列化-映射代码、嵌套结构体的凡序列化-映射代码](https://github.com/ichsonx/goexamples/blob/main/config/viper_2/main.go)
