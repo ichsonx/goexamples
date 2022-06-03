@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/fsnotify/fsnotify"
 	"log"
+	"time"
 )
 import viper "github.com/spf13/viper"
 
@@ -26,25 +28,41 @@ type Developer struct {
 
 //最基本的使用viper读取配置文件的方法
 func main() {
+	v := viper.New()
 	//设置需要读取的配置文件的名称
-	viper.SetConfigName("yamlconfig")
+	v.SetConfigName("yamlconfig")
 	//设置寻找配置文件的路径。允许设置多个
-	viper.AddConfigPath("./config/viper_1/")
+	v.AddConfigPath("./config/viper_1/")
 	//如果配置文件没有"后缀名"，则这个配置是**必需的**。否则可有可无
-	viper.SetConfigType("yaml")
-	if err := viper.ReadInConfig(); nil != err {
+	v.SetConfigType("yaml")
+	if err := v.ReadInConfig(); nil != err {
 		log.Fatalf("配置文件读取失败: %v\n", err)
 	}
 
 	c := new(Config)
-	// 反序列化，映射到结构类 C
-	if err := viper.Unmarshal(&c); err != nil {
+	// **反序列化，映射到结构类 C
+	if err := v.Unmarshal(&c); err != nil {
 		fmt.Errorf("error: ", err)
 	}
 	fmt.Println(c.Fruits)
 	fmt.Println(c.Developers)
+
+	// **热加载配置文件方法
+	hotReload(v, c)
+
+	time.Sleep(time.Second * 20)
 }
 
-func hotReload() {
+// 热加载配置文件方法，watchconfig会监听配置文件的修改
+// onconfigchange，相当于hook，在发生改变时在func(in fsnotify.Event)内做相应的自定义动作
+func hotReload(v *viper.Viper, c *Config) {
+	v.WatchConfig()
 
+	v.OnConfigChange(func(in fsnotify.Event) {
+		fmt.Printf("配置发生改变,重新解析配置: %v \n", in.Name)
+		if err := v.Unmarshal(c); err != nil {
+			fmt.Errorf("error: ", err)
+		}
+		fmt.Println(c)
+	})
 }
