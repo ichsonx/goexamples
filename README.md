@@ -24,3 +24,5 @@
 ### config
 [viper：viper最基本的读取配置文件方法，及一些需要注意的概念](https://github.com/ichsonx/goexamples/blob/main/config/viper_1/main.go)  
 [viper：一般反序列化-映射代码、嵌套结构体的凡序列化-映射代码](https://github.com/ichsonx/goexamples/blob/main/config/viper_2/main.go)
+### rpc
+[rpc基础调用的tcp版、http版本代码](https://github.com/ichsonx/goexamples/tree/main/rpc/rpc_1)
